@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>MedConnect: Smart Doctor KIOSK</title>
+    <style>
+        /* CSS Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body Style with Gradient Background */
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #e0e0e0, #c0c0c0); /* Grayish gradient */
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Navigation bar */
+        .navbar {
+            background-color: #0078D7; /* NavBar background color */
+            padding: 10px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Nav title (header) styling */
+        .navbar h1 {
+            font-size: 1.8rem;
+            color: white;
+            font-weight: bold;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Placeholder for navigation links, aligned to the left */
+        .nav-links {
+            position: absolute;
+            left: 20px;
+            display: flex;
+            gap: 15px;
+        }
+
+        /* Styling for future navigation links */
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Chatbot container with border and shadow */
+        .chatbot-container {
+            width: 90%;
+            max-width: 600px;
+            height: 80vh;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 2px solid #0078D7;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.3);
+            background-color: #fff;
+            position: relative;
+            margin: 20px auto;
+        }
+
+        /* Loader Styles */
+        .loader {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 5px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 5px solid #0078D7;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            z-index: 10;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Hide the iframe until it's loaded */
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: none; /* Initially hide the iframe */
+        }
+
+        /* Responsive behavior */
+        @media (max-width: 768px) {
+            .chatbot-container {
+                width: 95%;
+                height: 70vh;
+            }
+            .navbar h1 {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .chatbot-container {
+                height: 60vh;
+            }
+            .navbar h1 {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation bar with centered title and left-aligned navigation links -->
+    <div class="navbar">
+        <!-- Future space for navigation links (left-aligned) -->
+        <div class="nav-links">
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+        </div>
+
+        <!-- Title centered -->
+        <h1>MedConnect: Smart Doctor KIOSK</h1>
+    </div>
+
+    <!-- Chatbot container with loader -->
+    <div class="chatbot-container">
+        <!-- Loader (visible while iframe is loading) -->
+        <div class="loader" id="loader"></div>
+
+        <!-- Embed the chatbot iframe -->
+        <iframe id="chatbot" src="https://copilotstudio.microsoft.com/environments/Default-87bc3fe4-4286-4a77-a6f9-f9b51da4458f/bots/crb37_medHelp/webchat?_version_=2"></iframe>
+    </div>
+
+    <script>
+        // Get the iframe and loader elements
+        const iframe = document.getElementById('chatbot');
+        const loader = document.getElementById('loader');
+
+        // When the iframe loads, hide the loader and show the iframe
+        iframe.onload = function() {
+            loader.style.display = 'none'; // Hide the loader
+            iframe.style.display = 'block'; // Show the iframe
+        };
+    </script>
+
+</body>
+</html>
